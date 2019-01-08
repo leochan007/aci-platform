@@ -20,8 +20,10 @@ deb http://mirrors.aliyun.com/ubuntu/ xenial-proposed main restricted universe m
 # Update packages
 sudo apt-get update
 
-sudo apt-get install --allow-remove-essential -y apt-utils vim tzdata python3-pip build-essential libssl-dev
+sudo apt-get install -y apt-utils vim tzdata 
 
-sudo cp /usr/share/zoneinfo/Asia/Shanghai /etc/localtime
+sudo apt-get update
+
+sudo apt-get install -y python3-pip build-essential libssl-dev
 
 sudo cp /usr/share/zoneinfo/Asia/Shanghai /etc/localtime

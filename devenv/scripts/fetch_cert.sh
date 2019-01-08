@@ -25,7 +25,7 @@ else
         | openssl x509 -outform PEM | sudo tee /usr/local/share/ca-certificates/${STR}.crt
 
     sudo update-ca-certificates
-    sudo service docker restart
+    #sudo service docker restart
 fi
 
 #curl https://nexus.alphacario.com:8089/v2/ --cacert 

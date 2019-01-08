@@ -1,0 +1,10 @@
+apiVersion: v1
+data:
+  MODE: run
+  MONGO_URL: mongodb://root:example@mongo:27017/EOS?authSource=admin
+kind: ConfigMap
+metadata:
+  annotations:
+    field.cattle.io/creatorId: ""
+  name: eos-mainet
+  namespace: default

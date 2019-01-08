@@ -1,0 +1,21 @@
+[submodule "aci-smart-contracts"]
+	path = aci-smart-contracts
+	url = ssh://git@github.com/AlphaCarIO/aci-smart-contracts
+[submodule "aci-backend"]
+	path = aci-backend
+	url = ssh://git@github.com/leochan007/aci-backend
+[submodule "aci-demux-backend"]
+	path = aci-demux-backend
+	url = ssh://git@github.com/leochan007/aci-demux-backend
+[submodule "aci-frontend"]
+	path = aci-frontend
+	url = ssh://git@github.com/leochan007/aci-frontend
+[submodule "aci-management-backend"]
+	path = aci-management-backend
+	url = ssh://git@github.com/leochan007/aci-management-backend
+[submodule "aci-management-frontend"]
+	path = aci-management-frontend
+	url = ssh://git@github.com/leochan007/aci-management-frontend
+[submodule "aci-commons"]
+	path = aci-commons
+	url = ssh://git@github.com/leochan007/aci-commons

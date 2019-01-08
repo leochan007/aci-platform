@@ -1,0 +1,59 @@
+apiVersion: apps/v1beta2
+kind: Deployment
+metadata:
+  annotations:
+    field.cattle.io/creatorId: ""
+  labels:
+    workload.user.cattle.io/workloadselector: deployment-default-aci-backend-stg
+  name: aci-backend-stg
+  namespace: eos-dapp
+spec:
+  progressDeadlineSeconds: 600
+  replicas: 1
+  revisionHistoryLimit: 10
+  selector:
+    matchLabels:
+      workload.user.cattle.io/workloadselector: deployment-default-aci-backend-stg
+  strategy:
+    rollingUpdate:
+      maxSurge: 1
+      maxUnavailable: 0
+    type: RollingUpdate
+  template:
+    metadata:
+      annotations:
+        field.cattle.io/ports: '[[{"containerPort":3000,"dnsName":"aci-backend-stg-nodeport","kind":"NodePort","name":"3000tcp300011","protocol":"TCP","sourcePort":30001}]]'
+      labels:
+        workload.user.cattle.io/workloadselector: deployment-default-aci-backend-stg
+    spec:
+      imagePullSecrets:
+      - name: nexus-acar
+      containers:
+      - envFrom:
+        - secretRef:
+            name: secret-mongo-url
+            optional: false
+        - configMapRef:
+            name: configmap-kylin-testnet
+        image: nexus.alphacario.com:8089/aci-backend-stg:v1
+        imagePullPolicy: Always
+        name: aci-backend-stg
+        ports:
+        - containerPort: 3000
+          name: 3000tcp300011
+          protocol: TCP
+        resources: {}
+        securityContext:
+          allowPrivilegeEscalation: false
+          privileged: false
+          readOnlyRootFilesystem: false
+          runAsNonRoot: false
+        stdin: true
+        terminationMessagePath: /dev/termination-log
+        terminationMessagePolicy: File
+        tty: true
+      dnsPolicy: ClusterFirst
+      restartPolicy: Always
+      schedulerName: default-scheduler
+      securityContext: {}
+      terminationGracePeriodSeconds: 30

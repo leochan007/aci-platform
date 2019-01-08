@@ -1,0 +1,57 @@
+apiVersion: apps/v1beta2
+kind: Deployment
+metadata:
+  annotations:
+    field.cattle.io/creatorId: ""
+    field.cattle.io/publicEndpoints: '[{"port":18081,"protocol":"TCP","serviceName":"default:mongo-express-nodeport","allNodes":true}]'
+  labels:
+    workload.user.cattle.io/workloadselector: deployment-default-mongo-express
+  name: mongo-express
+  namespace: eos-dapp
+spec:
+  progressDeadlineSeconds: 600
+  replicas: 1
+  revisionHistoryLimit: 10
+  selector:
+    matchLabels:
+      workload.user.cattle.io/workloadselector: deployment-default-mongo-express
+  strategy:
+    rollingUpdate:
+      maxSurge: 1
+      maxUnavailable: 0
+    type: RollingUpdate
+  template:
+    metadata:
+      annotations:
+        field.cattle.io/ports: '[[{"containerPort":8081,"dnsName":"mongo-express-nodeport","kind":"NodePort","name":"8081tcp180811","protocol":"TCP","sourcePort":18081}]]'
+      labels:
+        workload.user.cattle.io/workloadselector: deployment-default-mongo-express
+    spec:
+      containers:
+      - envFrom:
+        - secretRef:
+            name: secret-me
+            optional: false
+        image: mongo-express
+        imagePullPolicy: Always
+        name: mongo-express
+        ports:
+        - containerPort: 8081
+          name: 8081tcp180811
+          protocol: TCP
+        resources: {}
+        securityContext:
+          allowPrivilegeEscalation: false
+          capabilities: {}
+          privileged: false
+          readOnlyRootFilesystem: false
+          runAsNonRoot: false
+        stdin: true
+        terminationMessagePath: /dev/termination-log
+        terminationMessagePolicy: File
+        tty: true
+      dnsPolicy: ClusterFirst
+      restartPolicy: Always
+      schedulerName: default-scheduler
+      securityContext: {}
+      terminationGracePeriodSeconds: 30

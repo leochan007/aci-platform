@@ -1,0 +1,51 @@
+version: '3'
+
+services:
+
+  mongo_db:
+    restart: always
+    build:
+      context: ./mongodb
+      dockerfile: Dockerfile
+    image: alphacar/mongodb
+    container_name: mongodb
+    ports:
+      - "27017:27017"
+    volumes:
+      - ./../../var/mongodb:/data/db:rw
+    environment:
+      MONGO_INITDB_ROOT_USERNAME: root
+      MONGO_INITDB_ROOT_PASSWORD: example
+      MONGO_INITDB_DATABASE: admin
+
+  nodeosd:
+    build:
+      context: ./eosio
+      dockerfile: Dockerfile
+    image: leochan007/eos
+    container_name: leochan_eos
+    entrypoint: /bin/bash
+    #command: ./start.sh
+    ports:
+      - 8888:8888
+      - 9876:9876
+    volumes:
+      - ./../../../var/eosio/config:/root/config
+      - ./../../../var/eosio/data:/root/data
+    environment:
+      MODE: run
+      MONGO_URL: mongodb://root:example@mongo_db:27017/EOS?authSource=admin
+    links:
+      - mongo_db
+
+  mongo-express:
+    image: mongo-express
+    restart: always
+    ports:
+      - 18081:8081
+    environment:
+      ME_CONFIG_MONGODB_SERVER: mongo_db
+      ME_CONFIG_MONGODB_ADMINUSERNAME: root
+      ME_CONFIG_MONGODB_ADMINPASSWORD: example
+    links:
+      - mongo_db

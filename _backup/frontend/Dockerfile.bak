@@ -1,0 +1,39 @@
+FROM node:8.14-jessie
+
+LABEL MAINTAINER leo chan <leochan007@163.com>
+
+ENV DEBIAN_FRONTEND noninteractive
+
+#ARG testnet
+
+#ENV TESTNET=$testnet
+
+COPY build /root/frontend/build
+
+COPY config /root/frontend/config
+
+COPY src /root/frontend/src
+
+COPY static /root/frontend/static
+
+COPY .babelrc .postcssrc.js index.html package.json /root/frontend/
+
+COPY .postcssrc.js /root/frontend/
+
+COPY index.html /root/frontend/
+
+COPY package.json /root/frontend/
+
+WORKDIR /root/frontend/
+
+RUN echo 'TESTNET:'$TESTNET
+
+RUN npm i && npm run build
+
+COPY nginx.conf /etc/nginx/nginx.conf
+
+COPY aci-frontend.conf /etc/nginx/conf.d/aci-frontend.conf
+
+RUN mv dist /alphacar_browser
+
+CMD nginx -g 'daemon off;'

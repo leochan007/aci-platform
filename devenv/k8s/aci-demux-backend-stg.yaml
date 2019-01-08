@@ -1,0 +1,64 @@
+apiVersion: apps/v1beta2
+kind: Deployment
+metadata:
+  annotations:
+    field.cattle.io/creatorId: ""
+  labels:
+    workload.user.cattle.io/workloadselector: deployment-default-aci-demux-backend-stg
+  name: aci-demux-backend-stg
+  namespace: eos-dapp
+spec:
+  progressDeadlineSeconds: 600
+  replicas: 1
+  revisionHistoryLimit: 10
+  selector:
+    matchLabels:
+      workload.user.cattle.io/workloadselector: deployment-default-aci-demux-backend-stg
+  strategy:
+    rollingUpdate:
+      maxSurge: 1
+      maxUnavailable: 0
+    type: RollingUpdate
+  template:
+    metadata:
+      annotations:
+        field.cattle.io/ports: '[[{"containerPort":4000,"dnsName":"aci-demux-backend-stg-nodeport","kind":"NodePort","name":"4000tcp300021","protocol":"TCP","sourcePort":30002}]]'
+      labels:
+        workload.user.cattle.io/workloadselector: deployment-default-aci-demux-backend-stg
+    spec:
+      imagePullSecrets:
+      - name: nexus-acar
+      containers:
+      - envFrom:
+        - secretRef:
+            name: secret-mongo-url
+            optional: false
+        - configMapRef:
+            name: configmap-kylin-testnet
+            optional: false
+        - configMapRef:
+            name: configmap-demux
+            optional: false
+        image: nexus.alphacario.com:8089/aci-demux-backend-stg:v1
+        imagePullPolicy: Always
+        name: aci-demux-backend-stg
+        ports:
+        - containerPort: 4000
+          name: 4000tcp300021
+          protocol: TCP
+        resources: {}
+        securityContext:
+          allowPrivilegeEscalation: false
+          capabilities: {}
+          privileged: false
+          readOnlyRootFilesystem: false
+          runAsNonRoot: false
+        stdin: true
+        terminationMessagePath: /dev/termination-log
+        terminationMessagePolicy: File
+        tty: true
+      dnsPolicy: ClusterFirst
+      restartPolicy: Always
+      schedulerName: default-scheduler
+      securityContext: {}
+      terminationGracePeriodSeconds: 30

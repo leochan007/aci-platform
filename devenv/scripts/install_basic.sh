@@ -18,9 +18,10 @@ deb http://mirrors.aliyun.com/ubuntu/ xenial-proposed main restricted universe m
 #deb http://extras.ubuntu.com/ubuntu/ xenial main \n
 
 # Update packages
-sudo apt-get update
 
-sudo apt-get install -y apt-utils vim tzdata 
+#sudo apt-get update
+
+#sudo apt-get install -y apt-utils vim tzdata 
 
 sudo apt-get update
 

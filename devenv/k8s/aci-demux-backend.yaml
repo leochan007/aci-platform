@@ -34,7 +34,7 @@ spec:
             name: secret-mongo-url
             optional: false
         - configMapRef:
-            name: configmap-kylin-testnet
+            name: configmap-mainnet
             optional: false
         - configMapRef:
             name: configmap-demux

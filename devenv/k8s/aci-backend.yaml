@@ -33,8 +33,6 @@ spec:
         - secretRef:
             name: secret-mongo-url
             optional: false
-        - configMapRef:
-            name: configmap-kylin-testnet
         image: nexus.alphacario.com:8089/aci-backend:v1
         imagePullPolicy: Always
         name: aci-backend

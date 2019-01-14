@@ -4,7 +4,7 @@ ifdef TESTNET
 	FLAG=testnet
 endif
 
-.IGNORE: local_update build clean
+.IGNORE: local_update build push clean
 
 local_update:
 	cd aci-backend/ && yarn add ../aci-commons

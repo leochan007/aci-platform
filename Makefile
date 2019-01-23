@@ -14,11 +14,13 @@ build:
 	cd aci-backend/ && ./gen_img.sh $(FLAG)
 	cd aci-demux-backend/ && ./gen_img.sh $(FLAG)
 	cd aci-frontend/ && ./gen_img.sh $(FLAG)
+	cd aci-blockchain-updater/ && ./gen_img.sh $(FLAG)
 
 push:
 	cd aci-backend/ && ./push_img.sh $(FLAG)
 	cd aci-demux-backend/ && ./push_img.sh $(FLAG)
 	cd aci-frontend/ && ./push_img.sh $(FLAG)
+	cd aci-blockchain-updater/ && ./push_img.sh $(FLAG)
 
 all: build push
 
@@ -29,6 +31,10 @@ backend:
 demux:
 	cd aci-demux-backend/ && ./gen_img.sh $(FLAG)
 	cd aci-demux-backend/ && ./push_img.sh $(FLAG)
+
+updater:
+	cd aci-blockchain-updater/ && ./gen_img.sh $(FLAG)
+	cd aci-blockchain-updater/ && ./push_img.sh $(FLAG)
 
 frontend:
 	cd aci-frontend/ && ./gen_img.sh $(FLAG)

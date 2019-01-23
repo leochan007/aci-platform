@@ -19,3 +19,6 @@
 [submodule "aci-commons"]
 	path = aci-commons
 	url = ssh://git@github.com/leochan007/aci-commons
+[submodule "aci-blockchain-updater"]
+	path = aci-blockchain-updater
+	url = ssh://git@github.com/leochan007/aci-blockchain-updater

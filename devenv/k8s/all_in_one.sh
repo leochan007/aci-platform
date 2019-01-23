@@ -28,12 +28,14 @@ fi
 
 if [ "prod" == "$FOLDER" ]; then
   kubectl $TMP_CMD apply -f aci-backend.yaml
-  kubectl $TMP_CMD apply -f aci-demux-backend.yaml
+  #kubectl $TMP_CMD apply -f aci-demux-backend.yaml
+  kubectl $TMP_CMD apply -f aci-blockchain-updater.yaml
   kubectl $TMP_CMD apply -f aci-frontend-ts.yaml
 else
   ./for_test.sh $2
   kubectl $TMP_CMD apply -f aci-backend-stg.yaml
-  kubectl $TMP_CMD apply -f aci-demux-backend-stg.yaml
+  #kubectl $TMP_CMD apply -f aci-demux-backend-stg.yaml
+  kubectl $TMP_CMD apply -f aci-blockchain-updater-stg.yaml
   kubectl $TMP_CMD apply -f aci-frontend-ts-stg.yaml
 fi
 

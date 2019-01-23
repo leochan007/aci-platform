@@ -34,7 +34,7 @@ do
   fi
   if echo $name|grep -qe '^secret-' ;then
     echo 'get secret:' $name
-    kubectl $TMP_CMD delete secret $name --namespace eos-dapp
+    kubectl $TMP_CMD delete secret $name $NS
     kubectl $TMP_CMD create secret generic --from-env-file=$item $name $NS
   fi
 done

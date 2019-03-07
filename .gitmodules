@@ -22,3 +22,6 @@
 [submodule "aci-blockchain-updater"]
 	path = aci-blockchain-updater
 	url = ssh://git@github.com/leochan007/aci-blockchain-updater
+[submodule "aci-reporter"]
+	path = aci-reporter
+	url = ssh://git@github.com/leochan007/aci-reporter

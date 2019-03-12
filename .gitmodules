@@ -10,12 +10,6 @@
 [submodule "aci-frontend"]
 	path = aci-frontend
 	url = ssh://git@github.com/leochan007/aci-frontend
-[submodule "aci-management-backend"]
-	path = aci-management-backend
-	url = ssh://git@github.com/leochan007/aci-management-backend
-[submodule "aci-management-frontend"]
-	path = aci-management-frontend
-	url = ssh://git@github.com/leochan007/aci-management-frontend
 [submodule "aci-commons"]
 	path = aci-commons
 	url = ssh://git@github.com/leochan007/aci-commons

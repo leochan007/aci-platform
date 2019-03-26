@@ -1,7 +1,7 @@
 local kp =
   (import 'kube-prometheus/kube-prometheus.libsonnet') + {
     _config+:: {
-      namespace: 'eos-dapp',
+      namespace: 'monitoring',
     },
   };
 

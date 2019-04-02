@@ -1,21 +1,21 @@
 [submodule "aci-smart-contracts"]
 	path = aci-smart-contracts
-	url = ssh://git@github.com/AlphaCarIO/aci-smart-contracts
+	url = https://github.com/AlphaCarIO/aci-smart-contracts
 [submodule "aci-backend"]
 	path = aci-backend
-	url = ssh://git@github.com/leochan007/aci-backend
+	url = https://github.com/leochan007/aci-backend
 [submodule "aci-demux-backend"]
 	path = aci-demux-backend
-	url = ssh://git@github.com/leochan007/aci-demux-backend
+	url = https://github.com/leochan007/aci-demux-backend
 [submodule "aci-frontend"]
 	path = aci-frontend
-	url = ssh://git@github.com/leochan007/aci-frontend
+	url = https://github.com/leochan007/aci-frontend
 [submodule "aci-commons"]
 	path = aci-commons
-	url = ssh://git@github.com/leochan007/aci-commons
+	url = https://github.com/leochan007/aci-commons
 [submodule "aci-blockchain-updater"]
 	path = aci-blockchain-updater
-	url = ssh://git@github.com/leochan007/aci-blockchain-updater
+	url = https://github.com/leochan007/aci-blockchain-updater
 [submodule "aci-reporter"]
 	path = aci-reporter
-	url = ssh://git@github.com/leochan007/aci-reporter
+	url = https://github.com/leochan007/aci-reporter

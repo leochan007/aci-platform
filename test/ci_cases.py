@@ -1,5 +1,5 @@
 from commons import *
-
+from locust import TaskSet
 import datetime
 
 curDate = datetime.date.today()
@@ -51,3 +51,29 @@ def postCreditInquiryTxCountLstWithEmptyDates(l):
         catch_response = True) as response:
         if response.status_code == 200:
             response.success()
+
+def login(l):
+    #l.client.post("/login", {"username":"your_name", "password":"your_pwd"})
+    pass
+
+def logout(l):
+    #l.client.post("/logout", {"username":"your_name", "password":"your_pwd"})
+    pass
+
+class CIBehavior(TaskSet):
+
+    tasks = {
+        getLatestCreditInquiry: 1,
+        getCreditInquiryByNonExistHash: 1,
+        getClassification: 1,
+        getCreditInquiryList: 1,
+        getCreditInquiryListGetEmptyList: 1,
+        postCreditInquiryTxCountLst: 1,
+        postCreditInquiryTxCountLstWithEmptyDates: 1,
+    }
+
+    def on_start(self):
+        login(self)
+
+    def on_stop(self):
+        logout(self)

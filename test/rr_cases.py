@@ -1,5 +1,5 @@
 from commons import *
-
+from locust import TaskSet
 import datetime
 
 def getLatestRewardRecord(l):
@@ -30,3 +30,28 @@ def getRewardRecordGroupInfo(l):
         'activity_type': '拉新王',
     }
     l.client.get("/creditinquiry/list", params = payload)
+
+def login(l):
+    #l.client.post("/login", {"username":"your_name", "password":"your_pwd"})
+    pass
+
+def logout(l):
+    #l.client.post("/logout", {"username":"your_name", "password":"your_pwd"})
+    pass
+
+class RRBehavior(TaskSet):
+
+    tasks = {
+        getLatestRewardRecord: 1,
+        getRewardRecordByHash: 1,
+        getRewardRecordByNonExistHash: 1,
+        getClassification: 1,
+        getRewardRecordList: 1,
+        getRewardRecordGroupInfo: 1,
+    }
+
+    def on_start(self):
+        login(self)
+
+    def on_stop(self):
+        logout(self)

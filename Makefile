@@ -1,8 +1,5 @@
-FLAG=testnet_stg
-
-ifdef TESTNET
-	FLAG=testnet
-endif
+echo 'FLAG:'$(FLAG)
+echo 'STG:'$(STG)
 
 .IGNORE: local_update build push clean
 
@@ -43,8 +40,8 @@ reporter:
 	cd aci-reporter/ && ./push_img.sh $(FLAG)
 
 frontend:
-	cd aci-frontend/ && ./gen_img.sh $(FLAG)
-	cd aci-frontend/ && ./push_img.sh $(FLAG)
+	cd aci-frontend/ && ./gen_img.sh $(FLAG) $(STG)
+	cd aci-frontend/ && ./push_img.sh $(FLAG) $(STG)
 
 clean:
 	#docker stop $(docker ps -aq) && docker rm -v $(docker ps -aq)

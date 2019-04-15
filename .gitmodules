@@ -19,3 +19,6 @@
 [submodule "aci-reporter"]
 	path = aci-reporter
 	url = https://github.com/leochan007/aci-reporter
+[submodule "config-management"]
+	path = config-management
+	url = https://github.com/leochan007/config-management

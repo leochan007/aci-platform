@@ -40,6 +40,8 @@ reporter:
 	cd aci-reporter/ && ./push_img.sh $(FLAG)
 
 frontend:
+	#stg FLAG=testnet_stg STG=a
+	#prod FLAG=prod
 	cd aci-frontend/ && ./gen_img.sh $(FLAG) $(STG)
 	cd aci-frontend/ && ./push_img.sh $(FLAG) $(STG)
 

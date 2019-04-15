@@ -1,6 +1,6 @@
 FILE=locust_test.py
 
-HOST=http://credit-stg.alphacario.com
+HOST=https://credit-stg.alphacario.com
 
 if [ -n "$1" ]; then
     FILE=$1

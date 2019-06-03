@@ -15,6 +15,7 @@ fi
 if [ "prod" == "$FOLDER" ]; then
   echo 'set-context acar-credit-prod...'
   kubectl config use-context acar-credit-prod
+  kubectl config use-context alphacar
 else
   echo 'set-context acar-test-env...'
   kubectl config use-context acar-test-env

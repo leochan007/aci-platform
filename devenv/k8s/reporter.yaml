@@ -4,8 +4,8 @@ metadata:
   annotations:
     field.cattle.io/creatorId: ""
   labels:
-    workload.user.cattle.io/workloadselector: deployment-default-aci-backend-stg
-  name: aci-backend-stg
+    workload.user.cattle.io/workloadselector: deployment-eos-dapp-aci-reporter
+  name: aci-reporter
   namespace: eos-dapp
 spec:
   progressDeadlineSeconds: 600
@@ -13,7 +13,7 @@ spec:
   revisionHistoryLimit: 10
   selector:
     matchLabels:
-      workload.user.cattle.io/workloadselector: deployment-default-aci-backend-stg
+      workload.user.cattle.io/workloadselector: deployment-eos-dapp-aci-reporter
   strategy:
     rollingUpdate:
       maxSurge: 1
@@ -21,28 +21,17 @@ spec:
     type: RollingUpdate
   template:
     metadata:
-      annotations:
-        field.cattle.io/ports: '[[{"containerPort":3000,"dnsName":"aci-backend-stg-nodeport","kind":"NodePort","name":"3000tcp300011","protocol":"TCP","sourcePort":30001}]]'
       labels:
-        workload.user.cattle.io/workloadselector: deployment-default-aci-backend-stg
+        workload.user.cattle.io/workloadselector: deployment-eos-dapp-aci-reporter
     spec:
-      imagePullSecrets:
-      - name: nexus
       containers:
-      - envFrom:
-        - secretRef:
-            name: secret-mongo-url
-            optional: false
-        image: repo.alphacario.com:8090/aci-backend-stg:v1
+      - image: repo.alphacario.com:8090/aci-reporter:v1
         imagePullPolicy: Always
-        name: aci-backend-stg
-        ports:
-        - containerPort: 3000
-          name: 3000tcp300011
-          protocol: TCP
+        name: aci-reporter
         resources: {}
         securityContext:
           allowPrivilegeEscalation: false
+          capabilities: {}
           privileged: false
           readOnlyRootFilesystem: false
           runAsNonRoot: false
@@ -50,8 +39,21 @@ spec:
         terminationMessagePath: /dev/termination-log
         terminationMessagePolicy: File
         tty: true
+        volumeMounts:
+        - mountPath: /root/config.yaml
+          name: configyaml
+          subPath: config.yaml
       dnsPolicy: ClusterFirst
+      imagePullSecrets:
+      - name: nexus
       restartPolicy: Always
       schedulerName: default-scheduler
       securityContext: {}
       terminationGracePeriodSeconds: 30
+      volumes:
+      - name: configyaml
+        secret:
+          defaultMode: 256
+          optional: false
+          secretName: reporter-conf
+          

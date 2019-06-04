@@ -27,13 +27,13 @@ spec:
         workload.user.cattle.io/workloadselector: deployment-default-aci-backend
     spec:
       imagePullSecrets:
-      - name: nexus-acar
+      - name: nexus
       containers:
       - envFrom:
         - secretRef:
             name: secret-mongo-url
             optional: false
-        image: nexus.alphacario.com:8089/aci-backend:v1
+        image: repo.alphacario.com:8090/aci-backend:v1
         imagePullPolicy: Always
         name: aci-backend
         ports:

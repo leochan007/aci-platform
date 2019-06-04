@@ -27,7 +27,7 @@ spec:
         workload.user.cattle.io/workloadselector: deployment-default-aci-demux-backend-stg
     spec:
       imagePullSecrets:
-      - name: nexus-acar
+      - name: nexus
       containers:
       - envFrom:
         - secretRef:
@@ -39,7 +39,7 @@ spec:
         - configMapRef:
             name: configmap-demux
             optional: false
-        image: nexus.alphacario.com:8089/aci-demux-backend-stg:v1
+        image: repo.alphacario.com:8090/aci-demux-backend-stg:v1
         imagePullPolicy: Always
         name: aci-demux-backend-stg
         ports:

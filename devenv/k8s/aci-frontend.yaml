@@ -27,9 +27,9 @@ spec:
         workload.user.cattle.io/workloadselector: deployment-default-aci-frontend
     spec:
       imagePullSecrets:
-      - name: nexus-acar
+      - name: nexus
       containers:
-      - image: nexus.alphacario.com:8089/aci-frontend:v1
+      - image: repo.alphacario.com:8090/aci-frontend:v1
         imagePullPolicy: Always
         name: aci-frontend
         ports:

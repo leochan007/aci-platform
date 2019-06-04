@@ -16,7 +16,7 @@ fi
 
 if [ "prod" == "$FOLDER" ]; then
   echo 'set-context acar-credit-prod...'
-  kubectl config use-context acar-credit-prod
+  #kubectl config use-context acar-credit-prod
   kubectl config use-context alphacar
   NS=''
 else
@@ -39,3 +39,6 @@ do
     kubectl $TMP_CMD create secret generic --from-env-file=$item $name $NS
   fi
 done
+
+kubectl $TMP_CMD delete secret reporter-conf $NS
+kubectl $TMP_CMD create secret generic --from-file=envs/$FOLDER/config.yaml reporter-conf $NS

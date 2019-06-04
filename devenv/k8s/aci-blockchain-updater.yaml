@@ -31,7 +31,7 @@ spec:
         - configMapRef:
             name: configmap-mainnet
             optional: false
-        image: nexus.alphacario.com:8089/aci-blockchain-updater:v1
+        image: repo.alphacario.com:8090/aci-blockchain-updater:v1
         imagePullPolicy: Always
         name: aci-blockchain-updater
         resources: {}
@@ -47,7 +47,7 @@ spec:
         tty: true
       dnsPolicy: ClusterFirst
       imagePullSecrets:
-      - name: nexus-acar
+      - name: nexus
       restartPolicy: Always
       schedulerName: default-scheduler
       securityContext: {}

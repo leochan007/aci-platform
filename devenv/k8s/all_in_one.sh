@@ -4,6 +4,8 @@ FOLDER=test
 
 TMP_CMD=
 
+NS='--namespace eos-dapp'
+
 if [ -n "$1" ]; then
     FOLDER=$1
 fi
@@ -14,8 +16,9 @@ fi
 
 if [ "prod" == "$FOLDER" ]; then
   echo 'set-context acar-credit-prod...'
-  kubectl config use-context acar-credit-prod
+  #kubectl config use-context acar-credit-prod
   kubectl config use-context alphacar
+  NS=''
 else
   echo 'set-context acar-test-env...'
   kubectl config use-context acar-test-env
@@ -32,12 +35,14 @@ if [ "prod" == "$FOLDER" ]; then
   #kubectl $TMP_CMD apply -f aci-demux-backend.yaml
   kubectl $TMP_CMD apply -f aci-blockchain-updater.yaml
   kubectl $TMP_CMD apply -f aci-frontend-ts.yaml
+  kubectl $TMP_CMD apply -f reporter_prod.yaml
 else
   ./for_test.sh $2
   kubectl $TMP_CMD apply -f aci-backend-stg.yaml
   #kubectl $TMP_CMD apply -f aci-demux-backend-stg.yaml
   kubectl $TMP_CMD apply -f aci-blockchain-updater-stg.yaml
   kubectl $TMP_CMD apply -f aci-frontend-ts-stg.yaml
+  kubectl $TMP_CMD apply -f reporter.yaml
 fi
 
 #kubectl apply -f aci-frontend-ts-stg.yaml

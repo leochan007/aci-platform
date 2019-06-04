@@ -1,0 +1,44 @@
+MONGODB_URL: 
+  "mongodb://root:example@127.0.0.1:27017/admin?authSource=admin"
+
+OUTPUT_FILE: report.xlsx
+
+MAIL:
+  host:
+    smtp.exmail.qq.com
+  port:
+    465
+  username:
+    do-not-reply@alphacar.io
+  password:
+    al*@#1Jks%KmyLA
+  to:
+    - test@alphacar.io
+    #- leo.chen@alphacar.io
+
+CRON:
+  type:
+    cron
+  conf:
+  #all
+    timezone:
+      ""
+    start_date:
+      ""
+    end_date:
+      ""
+  #cron
+    year:
+      ""
+    month:
+      ""
+    day:
+      ""
+    day_of_week:
+      "4"
+    hour:
+      "18"
+    minute:
+      "30"
+    second:
+      "0"
